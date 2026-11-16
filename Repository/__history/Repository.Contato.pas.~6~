@@ -1,0 +1,114 @@
+unit Repository.Contato;
+
+interface
+
+uses
+System.SysUtils,
+System.SyncObjs,
+Data.Db,
+DataModulePrincipal,
+Generics.Collections,
+Model.Compromisso,
+Model.Contato;
+
+type
+  IContatoRepository = interface
+    function ObterContatos: TObjectList<TContatoModel>;
+    function ObterContatosPorNome(trecho: string): TObjectList<TContatoModel>;
+    procedure Salvar(contato: TContatoModel);
+    procedure Excluir(id: Integer);
+  end;
+
+  TContatoRepository = class(TInterfacedObject, IContatoRepository)
+    private
+      procedure SalvarCompromissos(IdContato: Integer; compromissos: TObjectList<TCompromissoModel>);
+      procedure SalvarCompromisso(IdContato: Integer; compromisso: TCompromissoModel);
+      function ObterCompromissos: TObjectList<TCompromissoModel>;
+      function ObterContatosInternal: TObjectList<TContatoModel>;
+    public
+      function ObterContatos: TObjectList<TContatoModel>;
+      function ObterContatosPorNome(trecho: string): TObjectList<TContatoModel>;
+      procedure Salvar(contato: TContatoModel);
+      procedure Excluir(id: Integer);
+  end;
+
+implementation
+
+function TContatoRepository.ObterContatos: TObjectList<TContatoModel>;
+begin
+  dtmPrincipal.CriticalSection.Enter;
+  try
+    dtmPrincipal.fdTableContato.Filtered := False;
+    Result := ObterContatosInternal;
+  finally
+    dtmPrincipal.CriticalSection.Leave;
+  end;
+end;
+
+function SemAcentos(const s: string): string;
+const
+  Acentos = '·‡‚„‰ÈËÍÎÌÏÓÔÛÚÙıˆ˙˘˚¸Á¡¿¬√ƒ…» ÀÕÃŒœ”“‘’÷⁄Ÿ€‹«';
+  Base = 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUCC';
+var
+  i, j: Integer;
+  c: Char;
+begin
+  Result := s;
+  for i := 1 to Length(Result) do
+  begin
+  c := Result[i];
+  for j := 1 to Length(Acentos) do
+    if Acentos[j] = c then
+    begin
+      Result[i] := Base[j];
+      Break;
+    end;
+  end;
+end;
+
+function TContatoRepository.ObterContatosPorNome(trecho: string): TObjectList<TContatoModel>;
+var
+  todos: TObjectList<TContatoModel>;
+  filtro: string;
+  i: Integer;
+begin
+  filtro := SemAcentos(Trim(trecho)).ToLower;
+  todos := ObterContatos;
+  try
+    Result := TObjectList<TContatoModel>.Create;
+    for i := todos.Count - 1 downto 0 do
+    begin
+      if (filtro = '') or SemAcentos(todos[i].Nome).ToLower.Contains(filtro) then
+        Result.Add(todos.Extract(todos[i]));
+    end;
+    Result.Reverse;
+  finally
+    todos.Free;
+  end;
+end;
+
+function TContatoRepository.ObterContatosInternal: TObjectList<TContatoModel>;
+begin
+  Result := TObjectList<TContatoModel>.Create;
+
+  dtmPrincipal.fdTableContato.First;
+
+  while not dtmPrincipal.fdTableContato.Eof do
+  begin
+    var contato := TContatoModel.Create;
+    contato.Id := dtmPrincipal.fdTableContatoid.AsInteger;
+
+    contato.Nome := dtmPrincipal.fdTableContatonome.AsInteger;
+    contato.Telefone := dtmPrincipal.fdTableContatotelefone.AsString;
+    contato.Email := dtmPrincipal.fdTableContatoemail.AsString;
+    contato.Cep := dtmPrincipal.fdTableContatocep.AsString;
+    contato.Logradouro := dtmPrincipal.fdTableContatologradouro.AsString;
+    contato.Numero := dtmPrincipal.fdTableContatonumero.AsString;
+    contato.Bairro := dtmPrincipal.fdTableContatobairro.AsString;
+    contato.Cidade := dtmPrincipal.fdTableContatocidade.AsString;
+    contato.Estado := dtmPrincipal.fdTableContatoestado.AsString;
+    contato.Complemento := dtmPrincipal.fdTableContatocomplemento.AsString;
+  end;
+
+end;
+end.

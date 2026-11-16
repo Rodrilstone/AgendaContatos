@@ -1,0 +1,92 @@
+unit Controller.Contato;
+
+interface
+
+uses
+  TelaPrincipal,
+  Model.Contato,
+  Service.Contato,
+  System.Classes,
+  System.SysUtils,
+  System.Threading,
+  Vcl.Dialogs;
+
+type
+
+  TContatoController = class
+  private
+    FOwner: TfrmTelaPrincipal;
+    FService: IContatoService;
+  public
+    constructor Create(owner: TfrmTelaPrincipal; service: IContatoService);
+    procedure ObterContatos;
+    procedure ObterContatosPorNome(trecho: string);
+    procedure Salvar(contato: TContatoModel);
+    procedure Excluir(id: Integer);
+  end;
+
+implementation
+
+constructor TContatoController.Create(owner: TfrmTelaPrincipal; service: IContatoService);
+begin
+  FOwner := owner;
+  FService := service;
+end;
+
+procedure TContatoController.ObterContatos;
+begin
+  TTask.Run(
+  procedure
+  begin
+    try
+      var contatos := FService.ObterContatos;
+
+      TThread.Synchronize(nil,
+      procedure
+      begin
+        FOwner.lstContatos.Clear;
+        for var contato in contatos do
+          FOwner.lstContatos.AddItem(contato.Nome, contato);
+      end);
+    except
+      on E: Exception do
+        TThread.Synchronize(nil,
+          procedure
+          begin
+            ShowMessage('Erro: ' + E.Message);
+          end);
+    end;
+  end);
+end;
+
+procedure TContatoController.ObterContatosPorNome(trecho: string);
+begin
+  TTask.Run(
+    procedure
+    begin
+      try
+        var contatos := FService.ObterContatosPorNome(trecho);
+        TThread.Synchronize(nil,
+        procedure
+        begin
+          FOwner.lstContatos.Clear;
+          for var contato in contatos do
+            FOwner.lstContatos.AddItem(contato.Nome, contato);
+        end);
+      except
+        on E: Exception do
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              ShowMessage('Erro: ' + E.Message);
+            end);
+      end;
+    end);
+end;
+
+procedure TContatoController.Excluir(id: Integer);
+begin
+  FService.Excluir(id);
+end;
+
+end.

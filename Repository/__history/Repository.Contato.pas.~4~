@@ -1,0 +1,35 @@
+unit Repository.Contato;
+
+interface
+
+uses
+System.SysUtils,
+System.SyncObjs,
+Data.Db,
+DataModulePrincipal,
+Generics.Collections;
+
+type
+  IContatoRepository = interface
+    function ObterContatos: TObjectList<TContatoModel>;
+    function ObterContatosPorNome(trecho: string): TObjectList<TContatoModel>;
+    procedure Salvar(contato: TContatoModel);
+    procedure Excluir(id: Integer);
+  end;
+
+  TContatoRepository = class(TInterfacedObject, IContatoRepository)
+    private
+      procedure SalvarCompromissos(IdContato: Integer; compromissos: TObjectList<TCompromissoModel>);
+      procedure SalvarCompromisso(IdContato: Integer; compromisso: TCompromissoModel);
+      function ObterCompromissos: TObjectList<TCompromissoModel>;
+      function ObterContatosInternal: TObjectList<TContatoModel>;
+    public
+      function ObterContatos: TObjectList<TContatoModel>;
+      function ObterContatosPorNome(trecho: string): TObjectList<TContatoModel>;
+      procedure Salvar(contato: TContatoModel);
+      procedure Excluir(id: Integer);
+  end;
+
+implementation
+
+end.

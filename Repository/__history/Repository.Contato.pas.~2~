@@ -1,0 +1,21 @@
+unit Repository.Contato;
+
+interface
+
+uses
+System.SysUtils,
+System.SyncObjs,
+Data.Db,
+DataModulePrincipal,
+Generics.Collections;
+
+type
+  IContatoRepository = interface
+    function ObterContatos: TObjectList<TContatoModel>;
+    function ObterContatosPorNome(trecho: string): TObjectList<TContatoModel>;
+
+  end;
+
+implementation
+
+end.

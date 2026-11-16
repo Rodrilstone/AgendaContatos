@@ -1,0 +1,35 @@
+object frmTelaCadastroCompromisso: TfrmTelaCadastroCompromisso
+  Left = 0
+  Top = 0
+  Caption = 'Cadastro de compromisso'
+  ClientHeight = 240
+  ClientWidth = 540
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 15
+  object pnlBotoes: TPanel
+    Left = 0
+    Top = 200
+    Width = 540
+    Height = 40
+    Align = alBottom
+    TabOrder = 0
+    ExplicitLeft = 168
+    ExplicitWidth = 185
+  end
+  object pnlPrincipal: TPanel
+    Left = 0
+    Top = 0
+    Width = 540
+    Height = 200
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 64
+    ExplicitTop = 8
+    ExplicitWidth = 185
+  end
+end

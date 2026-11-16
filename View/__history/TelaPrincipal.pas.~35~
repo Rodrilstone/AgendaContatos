@@ -1,0 +1,115 @@
+unit TelaPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.Mask, Data.DB, Vcl.Grids, Vcl.DBGrids, Datasnap.DBClient, TelaCadastroContato, Model.Contato, Model.Compromisso, Service.Cep;
+
+type
+  TfrmTelaPrincipal = class(TForm)
+    pnlLateral: TPanel;
+    pnlPrincipal: TPanel;
+    btnAdicionar: TButton;
+    btnEditar: TButton;
+    btnExcluir: TButton;
+    edtNome: TEdit;
+    edtEmail: TEdit;
+    edtBairro: TEdit;
+    edtEstado: TEdit;
+    edtCidade: TEdit;
+    edtNumero: TEdit;
+    edtLogradouro: TEdit;
+    edtComplemento: TEdit;
+    pnlContatoBotoes: TPanel;
+    lblNome: TLabel;
+    lblEmail: TLabel;
+    lblTelefone: TLabel;
+    lblCep: TLabel;
+    lblNumero: TLabel;
+    lblEstado: TLabel;
+    lblLogradouro: TLabel;
+    lblBairro: TLabel;
+    lblCidade: TLabel;
+    lblComplemento: TLabel;
+    plnContato: TPanel;
+    pnlCompromissos: TPanel;
+    pnlPesquisa: TPanel;
+    lblPesquisa: TLabel;
+    edtPesquisa: TEdit;
+    lblCompromissos: TLabel;
+    lstContatos: TListView;
+    grdCompromissos: TDBGrid;
+    cdsCompromissos: TClientDataSet;
+    dtsCompromissos: TDataSource;
+    mskCep: TMaskEdit;
+    mskTelefone: TMaskEdit;
+    procedure FormCreate(Sender: TObject);
+  private
+    FTimerPesquisa: TTimer;
+    procedure HabilitarDesabilitarBotoesContato(Habilitar: Boolean);
+    procedure PreencherCampos(contato: TContatoModel);
+    procedure PreencherCompromissos(contato: TContatoModel);
+    procedure LimparCampos;
+    procedure AbrirCadastro(contato: TContatoModel);
+    procedure TimerPesquisaTimer(Sender: TObject);
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmTelaPrincipal: TfrmTelaPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  Factory.Contato,
+  Controller.Contato;
+
+var
+  FController: TContatoController;
+  FCepService: ICepService;
+
+procedure TfrmTelaPrincipal.AbrirCadastro(contato: TContatoModel);
+begin
+
+end;
+
+procedure TfrmTelaPrincipal.FormCreate(Sender: TObject);
+begin
+  FController := TContatoFactory.CriarController(Self);
+  FCepService := TContatoFactory.CriarCepService;
+  cdsCompromissos.CreateDataSet;
+end;
+
+procedure TfrmTelaPrincipal.HabilitarDesabilitarBotoesContato(
+  Habilitar: Boolean);
+begin
+
+end;
+
+procedure TfrmTelaPrincipal.LimparCampos;
+begin
+
+end;
+
+procedure TfrmTelaPrincipal.PreencherCampos(contato: TContatoModel);
+begin
+
+end;
+
+procedure TfrmTelaPrincipal.PreencherCompromissos(contato: TContatoModel);
+begin
+
+end;
+
+procedure TfrmTelaPrincipal.TimerPesquisaTimer(Sender: TObject);
+begin
+
+end;
+
+end.

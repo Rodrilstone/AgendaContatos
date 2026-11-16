@@ -1,0 +1,56 @@
+﻿unit Model.Contato;
+
+interface
+
+uses
+  Generics.Collections,
+  Model.Compromisso,
+  System.Classes;
+
+type
+  TContatoModel = class
+  private
+    FId: Integer;
+    FNome: string;
+    FTelefone: string;
+    FEmail: string;
+    FCep: string;
+    FLogradouro: string;
+    FNumero: string;
+    FBairro: string;
+    FCidade: string;
+    FEstado: string;
+    FComplemento: string;
+    FCompromissos: TObjectList<TCompromissoModel>;
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    property Id: Integer read FId write FId;
+    property Nome: string read FNome write FNome;
+    property Telefone: string read FTelefone write FTelefone;
+    property Email: string read FEmail write FEmail;
+    property Cep: string read FCep write FCep;
+    property Logradouro: string read FLogradouro write FLogradouro;
+    property Numero: string read FNumero write FNumero;
+    property Bairro: string read FBairro write FBairro;
+    property Cidade: string read FCidade write FCidade;
+    property Estado: string read FEstado write FEstado;
+    property Complemento: string read FComplemento write FComplemento;
+    property Compromissos: TObjectList<TCompromissoModel> read FCompromissos write FCompromissos;
+  end;
+
+implementation
+
+constructor TContatoModel.Create;
+begin
+  FCompromissos := TObjectList<TCompromissoModel>.Create;
+end;
+
+destructor TContatoModel.Destroy;
+begin
+  FCompromissos.Free;
+  inherited;
+end;
+
+end.

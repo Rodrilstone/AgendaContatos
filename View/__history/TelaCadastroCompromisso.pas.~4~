@@ -1,0 +1,37 @@
+unit TelaCadastroCompromisso;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.StdCtrls;
+
+type
+  TfrmTelaCadastroCompromisso = class(TForm)
+    pnlBotoes: TPanel;
+    pnlPrincipal: TPanel;
+    edtTitulo: TEdit;
+    edtDescricao: TEdit;
+    edtLocal: TEdit;
+    lblTitulo: TLabel;
+    lblDescricao: TLabel;
+    lblData: TLabel;
+    lblHorario: TLabel;
+    lblLocal: TLabel;
+    CheckBox1: TCheckBox;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmTelaCadastroCompromisso: TfrmTelaCadastroCompromisso;
+
+implementation
+
+{$R *.dfm}
+
+end.

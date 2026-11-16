@@ -1,0 +1,33 @@
+object dtmPrincipal: TdtmPrincipal
+  Height = 480
+  Width = 640
+  object fdConnection: TFDConnection
+    Params.Strings = (
+      'Database=agendacontatos'
+      'User_Name=postgres'
+      'Password=senha'
+      'DriverID=PG')
+    Connected = True
+    Left = 72
+    Top = 48
+  end
+  object fdDriverLink: TFDPhysPgDriverLink
+    VendorLib = 'C:\Program Files\PostgreSQL\18\bin\libpq.dll'
+    Left = 224
+    Top = 48
+  end
+  object fdTableContato: TFDTable
+    Connection = fdConnection
+    Left = 72
+    Top = 160
+  end
+  object fdTableCompromisso: TFDTable
+    Connection = fdConnection
+    Left = 224
+    Top = 160
+  end
+  object dtsContato: TDataSource
+    Left = 72
+    Top = 280
+  end
+end

@@ -1,0 +1,54 @@
+unit DataModulePrincipal;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
+  FireDAC.Phys.PGDef, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.Phys.PG;
+
+type
+  TDataModule1 = class(TDataModule)
+    fdConnection: TFDConnection;
+    fdDriverLink: TFDPhysPgDriverLink;
+    fdTableContato: TFDTable;
+    fdTableCompromisso: TFDTable;
+    dtsContato: TDataSource;
+    fdTableContatoid: TIntegerField;
+    fdTableContatonome: TWideStringField;
+    fdTableContatotelefone: TWideStringField;
+    fdTableContatoemail: TWideStringField;
+    fdTableContatocep: TWideStringField;
+    fdTableContatologradouro: TWideStringField;
+    fdTableContatonumero: TWideStringField;
+    fdTableContatobairro: TWideStringField;
+    fdTableContatocidade: TWideStringField;
+    fdTableContatoestado: TWideStringField;
+    fdTableContatocomplemento: TWideStringField;
+    fdTableCompromissoid: TIntegerField;
+    fdTableCompromissoidcontato: TIntegerField;
+    fdTableCompromissotitulo: TWideStringField;
+    fdTableCompromissodescricao: TWideStringField;
+    fdTableCompromissodata: TDateField;
+    fdTableCompromissohorario: TTimeField;
+    fdTableCompromissolocal: TWideStringField;
+    fdTableCompromissoconcluido: TBooleanField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

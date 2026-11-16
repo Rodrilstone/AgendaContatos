@@ -1,0 +1,26 @@
+object DataModule1: TDataModule1
+  Height = 480
+  Width = 640
+  object fdConnection: TFDConnection
+    Left = 56
+    Top = 40
+  end
+  object fdDriverLink: TFDPhysPgDriverLink
+    Left = 184
+    Top = 40
+  end
+  object fdTableContato: TFDTable
+    Connection = fdConnection
+    Left = 56
+    Top = 144
+  end
+  object fdTableCompromisso: TFDTable
+    Connection = fdConnection
+    Left = 184
+    Top = 144
+  end
+  object dtsContato: TDataSource
+    Left = 56
+    Top = 248
+  end
+end

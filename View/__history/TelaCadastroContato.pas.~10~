@@ -1,0 +1,55 @@
+unit TelaCadastroContato;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Mask, Vcl.StdCtrls,
+  Vcl.ComCtrls;
+
+type
+  TfrmTelaCadastroContato = class(TForm)
+    pnlContato: TPanel;
+    lblNome: TLabel;
+    edtNome: TEdit;
+    lblEmail: TLabel;
+    edtEmail: TEdit;
+    lblTelefone: TLabel;
+    lblCep: TLabel;
+    lblNumero: TLabel;
+    edtNumero: TEdit;
+    lblEstado: TLabel;
+    edtEstado: TEdit;
+    lblLogradouro: TLabel;
+    edtLogradouro: TEdit;
+    lblBairro: TLabel;
+    edtBairro: TEdit;
+    lblCidade: TLabel;
+    edtCidade: TEdit;
+    lblComplemento: TLabel;
+    edtComplemento: TEdit;
+    btnBuscarCep: TButton;
+    mskCep: TMaskEdit;
+    mskTelefone: TMaskEdit;
+    pnlCompromissos: TPanel;
+    pnlBotoes: TPanel;
+    lblCompromissos: TLabel;
+    ListView1: TListView;
+    pnlCompromissoBotoes: TPanel;
+    btnAdicionar: TButton;
+    btnEditar: TButton;
+    btnExcluir: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmTelaCadastroContato: TfrmTelaCadastroContato;
+
+implementation
+
+{$R *.dfm}
+
+end.
